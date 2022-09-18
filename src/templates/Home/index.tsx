@@ -1,23 +1,19 @@
-import { useEffect, useState } from 'react';
-import { getRandomFact } from 'services/chuckNorris';
+import { useChuckNorrisAPI } from 'hooks/useChuckNorrisAPI';
 
 import { Card } from 'components/Card';
+import { Select } from 'components/Select';
+import { Button } from 'components/Button';
 
 export const Hero = () => {
-  const [content, setContent] = useState('');
-  const [categories, setCategories] = useState([]);
-
-  const handleRandomFact = () => {
-    const res = getRandomFact();
-    res.then((data) => {
-      setContent(data.value);
-      setCategories(data.categories);
-    });
-  };
-
-  useEffect(() => {
-    handleRandomFact();
-  }, []);
+  const {
+    categories,
+    content,
+    factCategories,
+    handleFilterByCategory,
+    handleRandomFact,
+    loading,
+    selectedCategory,
+  } = useChuckNorrisAPI();
 
   return (
     <div className="bg-image bg-bottom bg-no-repeat bg-cover flex w-full h-full py-10 px-20 sm:p-20 items-center content-center justify-center">
@@ -34,25 +30,70 @@ export const Hero = () => {
       >
         <div
           className="
-          text-dark 
           w-full h-full 
           flex justify-center items-center"
         >
           <h1
             className="
+            flex
+            text-dark
             lg:text-9xl
             md:text-8xl
             sm:text-7xl
             text-5xl
+            h-full
             font-poppins uppercase font-black italic
             text-center md:text-left
-            self-start"
+            self-center items-center justify-center"
           >
             Chuck Norris Facts
           </h1>
         </div>
-        <div className="w-full h-full justify-center items-center flex">
-          <Card categories={categories} content={content} />
+        <div className="w-full h-full justify-center items-center flex flex-col gap-5 max-w-md">
+          <Card categories={factCategories} content={content} loading={loading} />
+
+          <Button label="Another random fact" onClick={handleRandomFact} />
+
+          <div className="w-full justify-center items-center flex flex-col gap-2 mt-10">
+            <label
+              htmlFor="category"
+              className="text-md font-poppins font-bold text-dark text-left w-full shadow-dark drop-shadow-2xl"
+            >
+              Discover more by category
+            </label>
+            <div className="w-full justify-center items-center flex flex-row gap-5">
+              <Select
+                id="category"
+                options={categories}
+                placeholder="Filter by category"
+                onChange={(event) => handleFilterByCategory(event.target.value)}
+              />
+              <Button
+                label="More from this category"
+                onClick={() => handleFilterByCategory(selectedCategory)}
+              />
+            </div>
+          </div>
+          {/* <div className="w-full justify-center items-center flex flex-row gap-5 mt-10">
+            <input
+              name="ramdom"
+              type="text"
+              placeholder="Search by keyword"
+              onChange={(event) => console.log(event.target.value)}
+              className="
+                rounded border-dark border-2 
+                block w-1/2 
+                text-sm text-dark 
+                font-poppins font-semibold
+                bg-light
+                transition ease-in-out
+                focus:ring-dark 
+                focus:outline-none
+                focus:text-dark
+                p-2
+                "
+            />
+          </div> */}
         </div>
       </div>
     </div>
