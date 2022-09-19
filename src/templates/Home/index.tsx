@@ -1,19 +1,57 @@
+import { useCallback, useState, useEffect } from 'react';
+
 import { useChuckNorrisAPI } from 'hooks/useChuckNorrisAPI';
+import { useDebounce } from 'hooks/useDebouce';
 
 import { Card } from 'components/Card';
 import { Select } from 'components/Select';
 import { Button } from 'components/Button';
+import { TextField } from 'components/TextField';
 
 export const Hero = () => {
   const {
+    loading,
+    selectedCategory,
     categories,
     content,
     factCategories,
+    facts,
+    setSelectedCategory,
     handleFilterByCategory,
     handleRandomFact,
-    loading,
-    selectedCategory,
+    handleFilterByKeyword,
   } = useChuckNorrisAPI();
+
+  const [keyword, setKeyword] = useState('');
+
+  const value = useDebounce(keyword, 1000);
+
+  useEffect(() => {
+    console.log({ keyword, value, facts, factCategories, selectedCategory });
+  }, [facts, selectedCategory]);
+
+  const handleGetFact = useCallback(() => {
+    if (selectedCategory !== 'random' && keyword === '') {
+      console.log('category');
+      setKeyword('');
+
+      handleFilterByCategory(selectedCategory);
+
+      return;
+    }
+
+    if (!!keyword) {
+      console.log('keyword');
+      setSelectedCategory('random');
+
+      handleFilterByKeyword(keyword);
+
+      return;
+    }
+
+    console.log('random');
+    handleRandomFact();
+  }, [selectedCategory, keyword]);
 
   return (
     <div className="bg-image bg-bottom bg-no-repeat bg-cover flex w-full h-full py-10 px-20 sm:p-20 items-center content-center justify-center">
@@ -52,7 +90,7 @@ export const Hero = () => {
         <div className="w-full h-full justify-center items-center flex flex-col gap-5 max-w-md">
           <Card categories={factCategories} content={content} loading={loading} />
 
-          <Button label="Another random fact" onClick={handleRandomFact} />
+          <Button label="Another random fact" onClick={handleGetFact} />
 
           <div className="w-full justify-center items-center flex flex-col gap-2 mt-10">
             <label
@@ -61,39 +99,33 @@ export const Hero = () => {
             >
               Discover more by category
             </label>
-            <div className="w-full justify-center items-center flex flex-row gap-5">
-              <Select
-                id="category"
-                options={categories}
-                placeholder="Filter by category"
-                onChange={(event) => handleFilterByCategory(event.target.value)}
-              />
-              <Button
-                label="More from this category"
-                onClick={() => handleFilterByCategory(selectedCategory)}
-              />
-            </div>
-          </div>
-          {/* <div className="w-full justify-center items-center flex flex-row gap-5 mt-10">
-            <input
+            <Select
+              id="category"
+              options={categories}
+              placeholder="Filter by category"
+              onChange={(event) => setSelectedCategory(event.target.value)}
+              buttonLabel="clear"
+              value={selectedCategory}
+              onClick={() => setSelectedCategory('random')}
+            />
+
+            <label
+              htmlFor="category"
+              className="text-md font-poppins font-bold text-dark text-left w-full shadow-dark drop-shadow-2xl"
+            >
+              Or find more by keyword
+            </label>
+
+            <TextField
               name="ramdom"
               type="text"
               placeholder="Search by keyword"
-              onChange={(event) => console.log(event.target.value)}
-              className="
-                rounded border-dark border-2 
-                block w-1/2 
-                text-sm text-dark 
-                font-poppins font-semibold
-                bg-light
-                transition ease-in-out
-                focus:ring-dark 
-                focus:outline-none
-                focus:text-dark
-                p-2
-                "
+              onChange={(event) => setKeyword(event.target.value)}
+              buttonLabel="clear"
+              value={keyword}
+              onClick={() => setKeyword('')}
             />
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

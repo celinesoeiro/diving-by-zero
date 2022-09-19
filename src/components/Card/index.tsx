@@ -1,4 +1,5 @@
 import { Spinner } from 'components/Spinner';
+import { Bagde } from 'components/Bagde';
 
 interface CardProps {
   content: string;
@@ -27,13 +28,13 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading }) => {
               {content}
             </p>
           </div>
-          <div className="flex flex-row gap-3">
-            {categories.map((category) => (
-              <span className="inline-block bg-neutral rounded-full px-4 text-sm font-poppins font-medium text-dark mt-5">
-                {category}
-              </span>
-            ))}
-          </div>
+          {categories.length > 0 && (
+            <div className="flex flex-row gap-3">
+              {categories.map((category) => (
+                <Bagde color="neutral" key={category} label={category} />
+              ))}
+            </div>
+          )}
         </>
       )}
     </div>
