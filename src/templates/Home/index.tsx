@@ -16,6 +16,7 @@ export const Hero = () => {
     content,
     factCategories,
     facts,
+    setFacts,
     setSelectedCategory,
     handleFilterByCategory,
     handleRandomFact,
@@ -27,8 +28,8 @@ export const Hero = () => {
   const value = useDebounce(keyword, 1000);
 
   useEffect(() => {
-    console.log({ keyword, value, facts, factCategories, selectedCategory });
-  }, [facts, selectedCategory]);
+    console.log({ keyword, value, facts, selectedCategory, content });
+  }, [facts, selectedCategory, content]);
 
   const handleGetFact = useCallback(() => {
     if (selectedCategory !== 'random' && keyword === '') {
@@ -53,8 +54,13 @@ export const Hero = () => {
     handleRandomFact();
   }, [selectedCategory, keyword]);
 
+  const handleClearFilterByKeyword = () => {
+    setFacts([]);
+    setKeyword('');
+  };
+
   return (
-    <div className="bg-image bg-bottom bg-no-repeat bg-cover flex w-full h-full py-10 px-20 sm:p-20 items-center content-center justify-center">
+    <div className="bg-image bg-bottom bg-no-repeat bg-cover flex w-full h-full py-10 px-20 sm:p-20 items-center content-center justify-center overflow-auto">
       <div
         className="
         grid
@@ -78,7 +84,7 @@ export const Hero = () => {
             lg:text-9xl
             md:text-8xl
             sm:text-7xl
-            text-5xl
+            text-4xl
             h-full
             font-poppins uppercase font-black italic
             text-center md:text-left
@@ -87,12 +93,27 @@ export const Hero = () => {
             Chuck Norris Facts
           </h1>
         </div>
-        <div className="w-full h-full justify-center items-center flex flex-col gap-5 max-w-md">
-          <Card categories={factCategories} content={content} loading={loading} />
+        <div className="w-full h-full justify-center items-center flex flex-col gap-5 max-w-lg">
+          <div className="w-full h-full max-h-96 overflow-auto py-5">
+            {facts.length > 0 ? (
+              <div className="grid grid-cols-2 gap-4">
+                {facts.map((fact) => (
+                  <Card categories={fact.categories} content={fact.value} hasToggle />
+                ))}
+              </div>
+            ) : (
+              <Card
+                categories={factCategories}
+                content={content}
+                loading={loading}
+                hasToggle={false}
+              />
+            )}
+          </div>
 
           <Button label="Another random fact" onClick={handleGetFact} />
 
-          <div className="w-full justify-center items-center flex flex-col gap-2 mt-10">
+          <div className="w-full justify-center items-center flex flex-col gap-2 mt-8 sm:mt-10">
             <label
               htmlFor="category"
               className="text-md font-poppins font-bold text-dark text-left w-full shadow-dark drop-shadow-2xl"
@@ -123,7 +144,7 @@ export const Hero = () => {
               onChange={(event) => setKeyword(event.target.value)}
               buttonLabel="clear"
               value={keyword}
-              onClick={() => setKeyword('')}
+              onClick={() => handleClearFilterByKeyword()}
             />
           </div>
         </div>

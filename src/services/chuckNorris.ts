@@ -1,6 +1,6 @@
 import { axiosFactory } from 'utils/http/axiosFactory';
 
-type Data = {
+export type APIContract = {
   categories: [];
   created_at: Date;
   icon_url: string;

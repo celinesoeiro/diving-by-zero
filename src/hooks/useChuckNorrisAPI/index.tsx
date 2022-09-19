@@ -4,6 +4,7 @@ import {
   listCategories,
   searchByCategory,
   searchByKeyword,
+  APIContract,
 } from 'services/chuckNorris';
 
 export const useChuckNorrisAPI = () => {
@@ -12,7 +13,7 @@ export const useChuckNorrisAPI = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('random');
   const [loading, setLoading] = useState(false);
-  const [facts, setFacts] = useState([]);
+  const [facts, setFacts] = useState<APIContract[]>([]);
 
   const handleRandomFact = () => {
     const res = getRandomFact();
@@ -72,6 +73,7 @@ export const useChuckNorrisAPI = () => {
     categories,
     selectedCategory,
     facts,
+    setFacts,
     setSelectedCategory,
     handleRandomFact,
     handleListCategories,
