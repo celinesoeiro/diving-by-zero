@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
-import {
-  getRandomFact,
-  searchByCategory,
-  searchByKeyword,
-  APIContract,
-} from 'services/chuckNorris';
+import { chuckNorrisAPI, APIContract } from 'services/chuckNorris';
 
 export const useChuckNorrisAPI = () => {
   const [fact, setFact] = useState<APIContract>();
   const [selectedCategory, setSelectedCategory] = useState('random');
-  const [loading, setLoading] = useState(false);
   const [facts, setFacts] = useState<APIContract[]>([]);
+
+  const { loading, getRandomFact, searchByCategory, searchByKeyword } = chuckNorrisAPI();
 
   const handleRandomFact = () => {
     const res = getRandomFact();
@@ -18,8 +14,6 @@ export const useChuckNorrisAPI = () => {
     res.then((data) => {
       setFact(data);
     });
-
-    setLoading(false);
   };
 
   const handleFilterByCategory = (category: string) => {
@@ -30,8 +24,6 @@ export const useChuckNorrisAPI = () => {
     res.then((data) => {
       setFact(data);
     });
-
-    setLoading(false);
   };
 
   const handleFilterByKeyword = (keyword: string) => {
@@ -40,8 +32,6 @@ export const useChuckNorrisAPI = () => {
     res.then((data) => {
       setFacts(data.result);
     });
-
-    setLoading(false);
   };
 
   useEffect(() => {

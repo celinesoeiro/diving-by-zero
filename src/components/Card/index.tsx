@@ -26,7 +26,7 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading, hasTog
     setText(content);
   }, [content]);
 
-  const showWholeContent = useCallback(() => {
+  const showWholeContent = () => {
     setShowMore((current) => !current);
     if (showMore === true) {
       setText(content);
@@ -34,7 +34,7 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading, hasTog
     }
 
     setText(`${content ? content.substring(0, limit) : ''}...`);
-  }, [showMore]);
+  };
 
   return (
     <div

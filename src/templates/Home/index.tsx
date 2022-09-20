@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useChuckNorrisAPI } from 'hooks/useChuckNorrisAPI';
 import { useDebounce } from 'hooks/useDebouce';
@@ -30,8 +30,7 @@ export const Hero = ({ categories }: HeroProps) => {
   const value = useDebounce(keyword, 1000);
 
   const handleGetFact = () => {
-    if (selectedCategory !== 'random' && keyword === '') {
-      console.log('category');
+    if (selectedCategory !== 'random' && value === '') {
       setKeyword('');
 
       handleFilterByCategory(selectedCategory);
@@ -64,6 +63,12 @@ export const Hero = ({ categories }: HeroProps) => {
       handleRandomFact();
     }
   };
+
+  useEffect(() => {
+    if (value) {
+      handleFilterByKeyword(value);
+    }
+  }, [value]);
 
   return (
     <div className="bg-image bg-bottom bg-no-repeat bg-cover flex w-full h-full py-10 px-20 sm:p-20 items-center content-center justify-center overflow-auto">
