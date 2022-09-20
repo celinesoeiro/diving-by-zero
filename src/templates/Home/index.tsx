@@ -113,7 +113,7 @@ export const Hero = ({ categories }: HeroProps) => {
           <Button label="Another random fact" onClick={handleGetFact} />
 
           <div className="w-full justify-center items-center flex flex-col gap-2 mt-8 sm:mt-10">
-            <Typography>Discover more by category</Typography>
+            <Typography alignment="left">Discover more by category</Typography>
 
             <Select
               id="category"

@@ -42,7 +42,12 @@ export const Typography: React.FC<TypographyProps> = ({
   const text = () => {
     return (
       <p
-        className={`text-md font-poppins font-${weight} text-${color} text-${alignment} w-full shadow-${color} drop-shadow-2xl`}
+        className={`
+          text-md text-${color} text-${alignment}
+          font-poppins font-${weight} 
+          w-full
+          shadow-${color} drop-shadow-2xl 
+          flex flex-row align-center`}
         {...props}
       >
         {children}

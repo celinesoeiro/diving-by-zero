@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import { Hero } from '../templates/Home';
+import { Footer } from 'components/Footer';
 
 import { listCategories } from 'services/chuckNorris';
 
@@ -10,7 +11,7 @@ interface HeroProps {
   categories: string[];
 }
 
-const Home: NextPage<HeroProps> = ({ categories }) => {
+const Home: NextPage<HeroProps> = ({ categories }: HeroProps) => {
   return (
     <div className="w-screen h-screen m-0 p-0 overflow-hidden ">
       <Head>
@@ -20,6 +21,8 @@ const Home: NextPage<HeroProps> = ({ categories }) => {
       </Head>
 
       <Hero categories={categories} />
+
+      <Footer />
     </div>
   );
 };
