@@ -29,9 +29,11 @@ export const Footer = () => {
           "
           href="https://api.chucknorris.io/"
           target={'_blank'}
+          rel="noreferrer"
         >
           About the API
         </a>
+
         <Typography alignment="center">
           Designed and Built with <TiHeart className="m-1" /> by Celine Soeiro
         </Typography>

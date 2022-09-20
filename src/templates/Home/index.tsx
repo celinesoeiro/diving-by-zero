@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { useChuckNorrisAPI } from 'hooks/useChuckNorrisAPI';
 import { useDebounce } from 'hooks/useDebouce';
 
+import { Button } from 'components/Button';
 import { Card } from 'components/Card';
 import { Select } from 'components/Select';
-import { Button } from 'components/Button';
 import { TextField } from 'components/TextField';
 import { Typography } from 'components/Typography';
+import { Wrapper } from 'components/Wrapper';
 
 interface HeroProps {
   categories: string[];
@@ -39,7 +40,7 @@ export const Hero = ({ categories }: HeroProps) => {
       return;
     }
 
-    if (!!value) {
+    if (value) {
       setSelectedCategory('random');
 
       handleFilterByKeyword(value);
@@ -52,6 +53,7 @@ export const Hero = ({ categories }: HeroProps) => {
 
   const handleClearFilterByKeyword = () => {
     setFacts([]);
+
     setKeyword('');
   };
 
@@ -67,10 +69,11 @@ export const Hero = ({ categories }: HeroProps) => {
     if (value) {
       handleFilterByKeyword(value);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   return (
-    <div className="bg-image bg-bottom bg-no-repeat bg-cover flex w-full h-full py-10 px-20 sm:p-20 items-center content-center justify-center overflow-auto">
+    <Wrapper>
       <div
         className="
         grid
@@ -97,7 +100,7 @@ export const Hero = ({ categories }: HeroProps) => {
             {facts.length > 0 ? (
               <div className="grid grid-cols-2 gap-4">
                 {facts.map((fact) => (
-                  <Card categories={fact.categories} content={fact.value} hasToggle />
+                  <Card categories={fact.categories} key={fact.id} content={fact.value} hasToggle />
                 ))}
               </div>
             ) : (
@@ -139,6 +142,6 @@ export const Hero = ({ categories }: HeroProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
