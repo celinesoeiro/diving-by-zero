@@ -22,6 +22,7 @@ export const TextField: React.FC<TextFieldProps> = ({ buttonLabel, onClick, ...p
         "
         {...props}
       />
+
       <button onClick={onClick} className="bg-dark text-neutral p-2 border-2 border-dark rounded-r">
         {buttonLabel}
       </button>

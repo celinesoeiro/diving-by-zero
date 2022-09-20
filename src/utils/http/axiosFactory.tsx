@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const axiosFactory = () => {
   return axios.create({
-    baseURL: "https://api.chucknorris.io/jokes/",
+    baseURL: 'https://api.chucknorris.io/jokes/',
   });
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useChuckNorrisAPI } from 'services/chuckNorris';
 
-import { useChuckNorrisAPI } from 'hooks/useChuckNorrisAPI';
 import { useDebounce } from 'hooks/useDebouce';
 
 import { Button } from 'components/Button';
@@ -22,9 +22,9 @@ export const Hero = ({ categories }: HeroProps) => {
     fact,
     setFacts,
     setSelectedCategory,
-    handleFilterByCategory,
-    handleRandomFact,
-    handleFilterByKeyword,
+    searchByCategory,
+    searchByKeyword,
+    getRandomFact,
   } = useChuckNorrisAPI();
 
   const [keyword, setKeyword] = useState('');
@@ -35,7 +35,7 @@ export const Hero = ({ categories }: HeroProps) => {
     if (selectedCategory !== 'random' && value === '') {
       setKeyword('');
 
-      handleFilterByCategory(selectedCategory);
+      searchByCategory(selectedCategory);
 
       return;
     }
@@ -43,12 +43,12 @@ export const Hero = ({ categories }: HeroProps) => {
     if (value) {
       setSelectedCategory('random');
 
-      handleFilterByKeyword(value);
+      searchByKeyword(value);
 
       return;
     }
 
-    handleRandomFact();
+    getRandomFact();
   };
 
   const handleClearFilterByKeyword = () => {
@@ -61,13 +61,18 @@ export const Hero = ({ categories }: HeroProps) => {
     setSelectedCategory('random');
 
     if (selectedCategory !== 'random') {
-      handleRandomFact();
+      getRandomFact();
     }
   };
 
   useEffect(() => {
+    getRandomFact();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (value) {
-      handleFilterByKeyword(value);
+      searchByKeyword(value);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
@@ -122,7 +127,7 @@ export const Hero = ({ categories }: HeroProps) => {
               id="category"
               options={categories}
               placeholder="Filter by category"
-              onChange={(event) => handleFilterByCategory(event.target.value)}
+              onChange={(event) => searchByCategory(event.target.value)}
               buttonLabel="clear"
               value={selectedCategory}
               onClick={() => handleClearFilterByCategory()}

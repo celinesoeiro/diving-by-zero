@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Spinner } from 'components/Spinner';
 import { Bagde } from 'components/Bagde';
+import { Spinner } from 'components/Spinner';
 import { Typography } from 'components/Typography';
 
 interface CardProps {
@@ -25,12 +25,15 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading, hasTog
     }
 
     setText(content);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
 
   const showWholeContent = () => {
     setShowMore((current) => !current);
+
     if (showMore === true) {
       setText(content);
+
       return;
     }
 
@@ -66,6 +69,7 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading, hasTog
               </button>
             )}
           </div>
+
           {categories && categories.length > 0 && (
             <div className="flex flex-row gap-3">
               {categories.map((category) => (

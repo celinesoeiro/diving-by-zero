@@ -26,6 +26,7 @@ export const Select: React.FC<SelectProps> = ({ options, buttonLabel, onClick, .
           <option value="random" className="text-sm capitalize font-poppins font-semibold">
             Filter by category
           </option>
+
           {options.map((opt) => (
             <option value={opt} key={opt} className="text-sm capitalize font-poppins font-semibold">
               {opt}
@@ -33,6 +34,7 @@ export const Select: React.FC<SelectProps> = ({ options, buttonLabel, onClick, .
           ))}
         </>
       </select>
+
       <button onClick={onClick} className="bg-dark text-neutral p-2 border-2 border-dark rounded-r">
         {buttonLabel}
       </button>

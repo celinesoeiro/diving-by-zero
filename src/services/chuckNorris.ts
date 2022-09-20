@@ -1,5 +1,7 @@
-import { axiosFactory } from 'utils/http/axiosFactory';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+
+import { axiosFactory } from 'utils/http/axiosFactory';
 
 export type APIContract = {
   categories: [];
@@ -11,8 +13,12 @@ export type APIContract = {
   value: string;
 };
 
-export const chuckNorrisAPI = () => {
+export const useChuckNorrisAPI = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [fact, setFact] = useState<APIContract>();
+  const [selectedCategory, setSelectedCategory] = useState('random');
+  const [facts, setFacts] = useState<APIContract[]>([]);
   const fetcher = axiosFactory();
 
   const getRandomFact = async () => {
@@ -21,10 +27,14 @@ export const chuckNorrisAPI = () => {
     try {
       const response = await fetcher.get('/random');
 
+      setFact(response.data);
+
       setLoading(false);
 
       return response.data;
     } catch (err) {
+      router.push('/500');
+
       return err;
     }
   };
@@ -32,13 +42,19 @@ export const chuckNorrisAPI = () => {
   const searchByCategory = async (category: string) => {
     setLoading(true);
 
+    setSelectedCategory(category);
+
     try {
       const response = await fetcher.get(`/random?category=${category}`);
+
+      setFact(response.data);
 
       setLoading(false);
 
       return response.data;
     } catch (err) {
+      router.push('/500');
+
       return err;
     }
   };
@@ -49,16 +65,25 @@ export const chuckNorrisAPI = () => {
     try {
       const response = await fetcher.get(`/search?query=${keyword}`);
 
+      setFacts(response.data.result);
+
       setLoading(false);
 
-      return response.data;
+      return response.data.result;
     } catch (err) {
+      router.push('/500');
+
       return err;
     }
   };
 
   return {
     loading,
+    fact,
+    selectedCategory,
+    facts,
+    setFacts,
+    setSelectedCategory,
     getRandomFact,
     searchByCategory,
     searchByKeyword,
