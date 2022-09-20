@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { useChuckNorrisAPI } from 'hooks/useChuckNorrisAPI';
 import { useDebounce } from 'hooks/useDebouce';
@@ -8,14 +8,16 @@ import { Select } from 'components/Select';
 import { Button } from 'components/Button';
 import { TextField } from 'components/TextField';
 
-export const Hero = () => {
+interface HeroProps {
+  categories: string[];
+}
+
+export const Hero = ({ categories }: HeroProps) => {
   const {
     loading,
     selectedCategory,
-    categories,
-    content,
-    factCategories,
     facts,
+    fact,
     setFacts,
     setSelectedCategory,
     handleFilterByCategory,
@@ -27,11 +29,7 @@ export const Hero = () => {
 
   const value = useDebounce(keyword, 1000);
 
-  useEffect(() => {
-    console.log({ keyword, value, facts, selectedCategory, content });
-  }, [facts, selectedCategory, content]);
-
-  const handleGetFact = useCallback(() => {
+  const handleGetFact = () => {
     if (selectedCategory !== 'random' && keyword === '') {
       console.log('category');
       setKeyword('');
@@ -41,22 +39,30 @@ export const Hero = () => {
       return;
     }
 
-    if (!!keyword) {
+    if (!!value) {
       console.log('keyword');
       setSelectedCategory('random');
 
-      handleFilterByKeyword(keyword);
+      handleFilterByKeyword(value);
 
       return;
     }
 
     console.log('random');
     handleRandomFact();
-  }, [selectedCategory, keyword]);
+  };
 
   const handleClearFilterByKeyword = () => {
     setFacts([]);
     setKeyword('');
+  };
+
+  const handleClearFilterByCategory = () => {
+    setSelectedCategory('random');
+
+    if (selectedCategory !== 'random') {
+      handleRandomFact();
+    }
   };
 
   return (
@@ -103,8 +109,8 @@ export const Hero = () => {
               </div>
             ) : (
               <Card
-                categories={factCategories}
-                content={content}
+                categories={fact?.categories}
+                content={fact?.value}
                 loading={loading}
                 hasToggle={false}
               />
@@ -124,10 +130,10 @@ export const Hero = () => {
               id="category"
               options={categories}
               placeholder="Filter by category"
-              onChange={(event) => setSelectedCategory(event.target.value)}
+              onChange={(event) => handleFilterByCategory(event.target.value)}
               buttonLabel="clear"
               value={selectedCategory}
-              onClick={() => setSelectedCategory('random')}
+              onClick={() => handleClearFilterByCategory()}
             />
 
             <label

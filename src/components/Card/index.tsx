@@ -4,8 +4,8 @@ import { Spinner } from 'components/Spinner';
 import { Bagde } from 'components/Bagde';
 
 interface CardProps {
-  content: string;
-  categories: string[];
+  content?: string;
+  categories?: string[] | [];
   loading?: boolean;
   hasToggle?: boolean;
 }
@@ -17,8 +17,8 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading, hasTog
   const limit = 75;
 
   useEffect(() => {
-    if (hasToggle && content.length > limit) {
-      setText(`${content.substring(0, limit)}...`);
+    if (hasToggle && content && content.length > limit) {
+      setText(`${content?.substring(0, limit)}...`);
 
       return;
     }
@@ -33,7 +33,7 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading, hasTog
       return;
     }
 
-    setText(`${content.substring(0, limit)}...`);
+    setText(`${content ? content.substring(0, limit) : ''}...`);
   }, [showMore]);
 
   return (
@@ -64,7 +64,7 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading, hasTog
               </button>
             )}
           </div>
-          {categories.length > 0 && (
+          {categories && categories.length > 0 && (
             <div className="flex flex-row gap-3">
               {categories.map((category) => (
                 <Bagde color="neutral" key={category} label={category} />

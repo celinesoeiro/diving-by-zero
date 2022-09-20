@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
 import {
   getRandomFact,
-  listCategories,
   searchByCategory,
   searchByKeyword,
   APIContract,
 } from 'services/chuckNorris';
 
 export const useChuckNorrisAPI = () => {
-  const [content, setContent] = useState('');
-  const [factCategories, setFactCategories] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [fact, setFact] = useState<APIContract>();
   const [selectedCategory, setSelectedCategory] = useState('random');
   const [loading, setLoading] = useState(false);
   const [facts, setFacts] = useState<APIContract[]>([]);
@@ -19,18 +16,7 @@ export const useChuckNorrisAPI = () => {
     const res = getRandomFact();
 
     res.then((data) => {
-      setContent(data.value);
-      setFactCategories(data.categories);
-    });
-
-    setLoading(false);
-  };
-
-  const handleListCategories = () => {
-    const res = listCategories();
-
-    res.then((data) => {
-      setCategories(data);
+      setFact(data);
     });
 
     setLoading(false);
@@ -42,8 +28,7 @@ export const useChuckNorrisAPI = () => {
     const res = searchByCategory(category);
 
     res.then((data) => {
-      setFactCategories(data.categories);
-      setContent(data.value);
+      setFact(data);
     });
 
     setLoading(false);
@@ -60,23 +45,17 @@ export const useChuckNorrisAPI = () => {
   };
 
   useEffect(() => {
-    setLoading(true);
-
     handleRandomFact();
-    handleListCategories();
   }, []);
 
   return {
     loading,
-    content,
-    factCategories,
-    categories,
     selectedCategory,
     facts,
+    fact,
     setFacts,
     setSelectedCategory,
     handleRandomFact,
-    handleListCategories,
     handleFilterByCategory,
     handleFilterByKeyword,
   };

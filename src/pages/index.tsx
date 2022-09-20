@@ -1,9 +1,16 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import { Hero } from '../templates/Home';
 
-const Home: NextPage = () => {
+import { listCategories } from 'services/chuckNorris';
+
+import { NextPage } from 'next';
+
+interface HeroProps {
+  categories: string[];
+}
+
+const Home: NextPage<HeroProps> = ({ categories }) => {
   return (
     <div className="w-screen h-screen m-0 p-0 overflow-hidden ">
       <Head>
@@ -12,9 +19,19 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Hero />
+      <Hero categories={categories} />
     </div>
   );
 };
+
+export async function getStaticProps() {
+  const categories = await listCategories();
+
+  return {
+    props: {
+      categories,
+    },
+  };
+}
 
 export default Home;
