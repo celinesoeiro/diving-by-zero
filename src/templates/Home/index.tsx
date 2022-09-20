@@ -7,6 +7,7 @@ import { Card } from 'components/Card';
 import { Select } from 'components/Select';
 import { Button } from 'components/Button';
 import { TextField } from 'components/TextField';
+import { Typography } from 'components/Typography';
 
 interface HeroProps {
   categories: string[];
@@ -88,22 +89,11 @@ export const Hero = ({ categories }: HeroProps) => {
           w-full h-full 
           flex justify-center items-center"
         >
-          <h1
-            className="
-            flex
-            text-dark
-            lg:text-9xl
-            md:text-8xl
-            sm:text-7xl
-            text-4xl
-            h-full
-            font-poppins uppercase font-black italic
-            text-center md:text-left
-            self-center items-center justify-center"
-          >
+          <Typography variant="heading" weight="black" color="dark">
             Chuck Norris Facts
-          </h1>
+          </Typography>
         </div>
+
         <div className="w-full h-full justify-center items-center flex flex-col gap-5 max-w-lg">
           <div className="w-full h-full max-h-96 overflow-auto py-5">
             {facts.length > 0 ? (
@@ -125,12 +115,8 @@ export const Hero = ({ categories }: HeroProps) => {
           <Button label="Another random fact" onClick={handleGetFact} />
 
           <div className="w-full justify-center items-center flex flex-col gap-2 mt-8 sm:mt-10">
-            <label
-              htmlFor="category"
-              className="text-md font-poppins font-bold text-dark text-left w-full shadow-dark drop-shadow-2xl"
-            >
-              Discover more by category
-            </label>
+            <Typography>Discover more by category</Typography>
+
             <Select
               id="category"
               options={categories}
@@ -141,12 +127,7 @@ export const Hero = ({ categories }: HeroProps) => {
               onClick={() => handleClearFilterByCategory()}
             />
 
-            <label
-              htmlFor="category"
-              className="text-md font-poppins font-bold text-dark text-left w-full shadow-dark drop-shadow-2xl"
-            >
-              Or find more by keyword
-            </label>
+            <Typography>Or find more by keyword</Typography>
 
             <TextField
               name="ramdom"

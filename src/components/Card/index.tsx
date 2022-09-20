@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { Spinner } from 'components/Spinner';
 import { Bagde } from 'components/Bagde';
+import { Typography } from 'components/Typography';
 
 interface CardProps {
   content?: string;
@@ -52,9 +53,10 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading, hasTog
       ) : (
         <>
           <div className="flex flex-col gap-4">
-            <p className="text-lg sm:text-xl text-center text-dark font-poppins font-semibold">
+            <Typography alignment="center" variant="text_display">
               {text}
-            </p>
+            </Typography>
+
             {hasToggle && (
               <button
                 className="font-semibold text-xs text-secondary cursor-pointer self-end"
