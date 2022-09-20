@@ -40,7 +40,6 @@ export const Hero = ({ categories }: HeroProps) => {
     }
 
     if (!!value) {
-      console.log('keyword');
       setSelectedCategory('random');
 
       handleFilterByKeyword(value);
@@ -48,7 +47,6 @@ export const Hero = ({ categories }: HeroProps) => {
       return;
     }
 
-    console.log('random');
     handleRandomFact();
   };
 
