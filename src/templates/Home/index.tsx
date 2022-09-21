@@ -106,7 +106,10 @@ export const Hero = ({ categories }: HeroProps) => {
             Chuck Norris Facts
           </Typography>
 
-          <div className="w-full h-full overflow-auto flex flex-col pr-2 items-center content-center justify-center ">
+          <div
+            id="content"
+            className="w-full h-full overflow-auto flex flex-col pr-2 items-center content-center justify-center "
+          >
             {facts.length > 0 ? (
               <div className="grid grid-cols-2 gap-4 ">
                 {facts.map((fact) => (
@@ -119,10 +122,11 @@ export const Hero = ({ categories }: HeroProps) => {
                 content={fact?.value}
                 loading={loading}
                 hasToggle={false}
+                id="content-card"
               />
             )}
 
-            <Button label="Another random fact" onClick={handleGetFact} />
+            <Button label="Another random fact" onClick={handleGetFact} id="fetch-fact-button" />
 
             <Typography alignment="left">Discover more by category</Typography>
 

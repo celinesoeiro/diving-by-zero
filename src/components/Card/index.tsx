@@ -1,17 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, HTMLAttributes } from 'react';
 
 import { Bagde } from 'components/Bagde';
 import { Spinner } from 'components/Spinner';
 import { Typography } from 'components/Typography';
 
-interface CardProps {
+interface CardProps extends HTMLAttributes<HTMLDivElement> {
   content?: string;
   categories?: string[] | [];
   loading?: boolean;
   hasToggle?: boolean;
 }
 
-export const Card: React.FC<CardProps> = ({ content, categories, loading, hasToggle = false }) => {
+export const Card: React.FC<CardProps> = ({
+  content,
+  categories,
+  loading,
+  hasToggle = false,
+  ...props
+}) => {
   const [showMore, setShowMore] = useState(true);
   const [text, setText] = useState(content);
 
@@ -50,6 +56,7 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading, hasTog
       p-5 sm:p-6
       w-full h-full
       max-h-40"
+      {...props}
     >
       {loading ? (
         <Spinner />

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cy:open": "yarn cypress open",
+    "cy:run": "yarn cypress run"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -16,11 +18,13 @@
     "react-icons": "^4.4.0"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.10.0",
     "@types/node": "18.7.18",
     "@types/react": "18.0.20",
     "@types/react-dom": "18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "autoprefixer": "^10.4.11",
+    "cypress": "^10.8.0",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.0",
     "postcss": "^8.4.16",
