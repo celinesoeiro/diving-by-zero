@@ -113,7 +113,13 @@ export const Hero = ({ categories }: HeroProps) => {
             {facts.length > 0 ? (
               <div className="grid grid-cols-2 gap-4 ">
                 {facts.map((fact) => (
-                  <Card categories={fact.categories} key={fact.id} content={fact.value} hasToggle />
+                  <Card
+                    categories={fact.categories}
+                    key={fact.id}
+                    content={fact.value}
+                    hasToggle
+                    id="content-card"
+                  />
                 ))}
               </div>
             ) : (
