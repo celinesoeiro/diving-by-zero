@@ -45,11 +45,11 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading, hasTog
       className="
       bg-light 
       rounded border-none 
-      max-w-lg max-h-64 
       overflow-auto
-      shadow-lg 
-      px-6 sm:px-8 py-5
-      w-full"
+      shadow-lg
+      p-5 sm:p-6
+      w-full h-full
+      max-h-40"
     >
       {loading ? (
         <Spinner />
@@ -62,7 +62,7 @@ export const Card: React.FC<CardProps> = ({ content, categories, loading, hasTog
 
             {hasToggle && (
               <button
-                className="font-semibold text-xs text-secondary cursor-pointer self-end"
+                className="font-semibold text-xs text-secondary cursor-pointer self-end p-0 m-0"
                 onClick={showWholeContent}
               >
                 Show {showMore ? 'more' : 'less'}

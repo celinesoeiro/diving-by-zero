@@ -5,7 +5,7 @@ type Colors = 'neutral' | 'primary' | 'secondary' | 'dark' | 'light';
 interface TypographyProps extends PropsWithChildren, React.HTMLAttributes<HTMLParagraphElement> {
   variant?: 'heading' | 'highlight' | 'text' | 'text_display';
   color?: Colors;
-  weight?: 'black' | 'bold' | 'medium' | 'light';
+  weight?: 'bold' | 'medium' | 'light';
   alignment?: 'center' | 'left' | 'justify';
 }
 
@@ -24,13 +24,13 @@ export const Typography: React.FC<TypographyProps> = ({
         flex
         text-${color}
         lg:text-9xl
-        md:text-8xl
-        sm:text-7xl
-        text-4xl
-        h-full
+        md:text-7xl
+        sm:text-6xl
+        text-7xl
         font-poppins uppercase font-${weight} italic
-        text-${alignment} md:text-left
+        text-center md:text-left
         self-center items-center justify-center
+        my-5
         `}
         {...props}
       >
@@ -45,7 +45,7 @@ export const Typography: React.FC<TypographyProps> = ({
         className={`
           text-md text-${color} text-${alignment}
           font-poppins font-${weight} 
-          w-full
+          w-full my-2
           shadow-${color} drop-shadow-2xl 
           flex flex-row align-center`}
         {...props}
@@ -58,7 +58,7 @@ export const Typography: React.FC<TypographyProps> = ({
   const highlight = () => {
     return (
       <p
-        className={`text-md font-poppins font-${weight} text-${color} text-${alignment} w-full shadow-${color} drop-shadow-2xl`}
+        className={`text-md font-poppins font-${weight} text-${color} text-${alignment} w-full shadow-${color} drop-shadow-2xl my-2`}
         {...props}
       >
         {children}
@@ -69,7 +69,7 @@ export const Typography: React.FC<TypographyProps> = ({
   const textDisplay = () => {
     return (
       <p
-        className={`text-lg sm:text-xl text-${alignment} text-${color} font-poppins font-${weight}`}
+        className={`text-lg sm:text-xl text-${alignment} text-${color} font-poppins font-${weight} my-2`}
       >
         {children}
       </p>

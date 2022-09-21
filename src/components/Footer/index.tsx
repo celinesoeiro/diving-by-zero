@@ -1,42 +1,28 @@
+/* eslint-disable react/jsx-newline */
 import { TiHeart } from 'react-icons/ti';
 
-import { Typography } from 'components/Typography';
+import { Anchor } from 'components/Anchor';
 
 export const Footer = () => {
   return (
     <div className="max-w-7xl w-full">
       <div
         className="
-          flex flex-row
-          gap-8 
-          bottom-0 
-          absolute 
+          flex flex-col
+          sm:flex-row
+          gap-5
+          bottom-0 mb-5
           items-center justify-center
-          w-full h-20
-          px-20
+          w-full
+          
         "
       >
-        <a
-          className="
-            text-dark text-end
-            font-poppins font-semibold
-            w-full
-            justify-end
-            underline
-            underline-offset-4
-            hover:text-primary
-            transition-colors
-          "
-          href="https://api.chucknorris.io/"
-          target={'_blank'}
-          rel="noreferrer"
-        >
-          About the API
-        </a>
+        <Anchor href="https://api.chucknorris.io/">About the API</Anchor>
 
-        <Typography alignment="center">
-          Designed and Built with <TiHeart className="m-1" /> by Celine Soeiro
-        </Typography>
+        <p className="flex flex-row">
+          Designed and Built with <TiHeart className="m-1" /> by
+          <Anchor href="https://www.celinesoeiro.com/">Celine Soeiro</Anchor>
+        </p>
       </div>
     </div>
   );

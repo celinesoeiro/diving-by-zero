@@ -2,8 +2,6 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { listCategories } from 'services/chuckNorris';
 
-import { Footer } from 'components/Footer';
-
 import { Hero } from '../templates/Home';
 
 interface HeroProps {
@@ -36,8 +34,6 @@ const Home: NextPage<HeroProps> = ({ categories }: HeroProps) => {
       </Head>
 
       <Hero categories={categories} />
-
-      <Footer />
     </>
   );
 };

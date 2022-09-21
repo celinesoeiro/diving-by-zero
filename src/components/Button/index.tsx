@@ -20,6 +20,7 @@ export const Button: React.FC<ButtonProps> = ({ label, ...props }) => {
       active:shadow-none
       active:top-1
       active:left-1
+      my-5
       "
       {...props}
     >

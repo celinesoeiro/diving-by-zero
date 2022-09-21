@@ -5,6 +5,7 @@ import { useDebounce } from 'hooks/useDebouce';
 
 import { Button } from 'components/Button';
 import { Card } from 'components/Card';
+import { Footer } from 'components/Footer';
 import { Select } from 'components/Select';
 import { TextField } from 'components/TextField';
 import { Typography } from 'components/Typography';
@@ -81,29 +82,33 @@ export const Hero = ({ categories }: HeroProps) => {
     <Wrapper>
       <div
         className="
-        grid
-        sm:grid-cols-1 sm:grid-rows-2 
-        md:grid-cols-2 md:grid-rows-1
-        lg:grid-cols-2 lg:grid-rows-1 
-        xl:grid-cols-2 xl:grid-rows-1 
-        w-full max-w-7xl 
-        gap-10 
-        content-center"
+          flex flex-col
+          w-full h-full 
+          py-10 px-5
+          xl:p-20 
+          items-center content-center justify-center 
+          overflow-hidden
+        "
       >
         <div
           className="
-          w-full h-full 
-          flex justify-center items-center"
+            grid
+            sm:grid-cols-1 sm:grid-rows-2 
+            md:grid-cols-2 md:grid-rows-1
+            lg:grid-cols-2 lg:grid-rows-1 
+            xl:grid-cols-2 xl:grid-rows-1 
+            overflow-auto
+            gap-5
+            w-full h-full max-w-7xl 
+            "
         >
-          <Typography variant="heading" weight="black" color="dark">
+          <Typography variant="heading" weight="bold" color="dark" alignment="center">
             Chuck Norris Facts
           </Typography>
-        </div>
 
-        <div className="w-full h-full justify-center items-center flex flex-col gap-5 max-w-lg">
-          <div className="w-full h-full max-h-96 overflow-auto py-5">
+          <div className="w-full h-full overflow-auto flex flex-col pr-2 items-center content-center justify-center ">
             {facts.length > 0 ? (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 ">
                 {facts.map((fact) => (
                   <Card categories={fact.categories} key={fact.id} content={fact.value} hasToggle />
                 ))}
@@ -116,11 +121,9 @@ export const Hero = ({ categories }: HeroProps) => {
                 hasToggle={false}
               />
             )}
-          </div>
 
-          <Button label="Another random fact" onClick={handleGetFact} />
+            <Button label="Another random fact" onClick={handleGetFact} />
 
-          <div className="w-full justify-center items-center flex flex-col gap-2 mt-8 sm:mt-10">
             <Typography alignment="left">Discover more by category</Typography>
 
             <Select
@@ -147,6 +150,8 @@ export const Hero = ({ categories }: HeroProps) => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </Wrapper>
   );
 };
