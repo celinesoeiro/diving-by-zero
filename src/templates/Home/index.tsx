@@ -11,11 +11,11 @@ import { TextField } from 'components/TextField';
 import { Typography } from 'components/Typography';
 import { Wrapper } from 'components/Wrapper';
 
-interface HeroProps {
+interface HomeProps {
   categories: string[];
 }
 
-export const Hero = ({ categories }: HeroProps) => {
+export const Home = ({ categories }: HomeProps) => {
   const {
     loading,
     selectedCategory,
@@ -67,6 +67,7 @@ export const Hero = ({ categories }: HeroProps) => {
   };
 
   useEffect(() => {
+    console.log('aqui');
     getRandomFact();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

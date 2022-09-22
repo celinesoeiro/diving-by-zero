@@ -2,13 +2,13 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { listCategories } from 'services/chuckNorris';
 
-import { Hero } from '../templates/Home';
+import { Home } from '../templates/Home';
 
-interface HeroProps {
+interface HomeProps {
   categories: string[];
 }
 
-const Home: NextPage<HeroProps> = ({ categories }: HeroProps) => {
+const HomePage: React.FC<HomeProps> = ({ categories }) => {
   return (
     <>
       <Head>
@@ -33,7 +33,7 @@ const Home: NextPage<HeroProps> = ({ categories }: HeroProps) => {
         <meta name="theme-color" content="#ffffff" />
       </Head>
 
-      <Hero categories={categories} />
+      <Home categories={categories} />
     </>
   );
 };
@@ -48,4 +48,4 @@ export async function getStaticProps() {
   };
 }
 
-export default Home;
+export default HomePage;

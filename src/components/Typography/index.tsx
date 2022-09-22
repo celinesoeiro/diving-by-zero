@@ -7,6 +7,7 @@ interface TypographyProps extends PropsWithChildren, React.HTMLAttributes<HTMLPa
   color?: Colors;
   weight?: 'bold' | 'medium' | 'light';
   alignment?: 'center' | 'left' | 'justify';
+  animation?: boolean;
 }
 
 export const Typography: React.FC<TypographyProps> = ({
@@ -14,6 +15,7 @@ export const Typography: React.FC<TypographyProps> = ({
   color = 'dark',
   weight = 'bold',
   alignment = 'left',
+  animation = false,
   children,
   ...props
 }) => {
@@ -31,6 +33,7 @@ export const Typography: React.FC<TypographyProps> = ({
         text-center md:text-left
         self-center items-center justify-center
         my-5
+        ${animation ? `hover:animate-horizontalShaking` : ''}
         `}
         {...props}
       >
