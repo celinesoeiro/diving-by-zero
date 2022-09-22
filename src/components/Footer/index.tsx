@@ -5,9 +5,8 @@ import { Anchor } from 'components/Anchor';
 
 export const Footer = () => {
   return (
-    <div className="max-w-7xl w-full">
-      <div
-        className="
+    <div
+      className="
           flex flex-col
           sm:flex-row
           gap-5
@@ -16,14 +15,13 @@ export const Footer = () => {
           w-full
           
         "
-      >
-        <Anchor href="https://api.chucknorris.io/">About the API</Anchor>
+    >
+      <Anchor href="https://api.chucknorris.io/">About the API</Anchor>
 
-        <p className="flex flex-row">
-          Designed and Built with <TiHeart className="m-1" /> by
-          <Anchor href="https://www.celinesoeiro.com/">Celine Soeiro</Anchor>
-        </p>
-      </div>
+      <p className="flex flex-row">
+        Designed and Built with <TiHeart className="m-1" /> by
+        <Anchor href="https://www.celinesoeiro.com/">Celine Soeiro</Anchor>
+      </p>
     </div>
   );
 };

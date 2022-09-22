@@ -8,6 +8,7 @@ interface TypographyProps extends PropsWithChildren, React.HTMLAttributes<HTMLPa
   weight?: 'bold' | 'medium' | 'light';
   alignment?: 'center' | 'left' | 'justify';
   animation?: boolean;
+  blur?: boolean;
 }
 
 export const Typography: React.FC<TypographyProps> = ({
@@ -16,6 +17,7 @@ export const Typography: React.FC<TypographyProps> = ({
   weight = 'bold',
   alignment = 'left',
   animation = false,
+  blur = false,
   children,
   ...props
 }) => {
@@ -34,6 +36,7 @@ export const Typography: React.FC<TypographyProps> = ({
         self-center items-center justify-center
         my-5
         ${animation ? `hover:animate-horizontalShaking` : ''}
+        ${blur ? `blur-sm hover:blur-0` : 'blur-0'}
         `}
         {...props}
       >
@@ -50,7 +53,9 @@ export const Typography: React.FC<TypographyProps> = ({
           font-poppins font-${weight} 
           w-full my-2
           shadow-${color} drop-shadow-2xl 
-          flex flex-row align-center`}
+          flex flex-row align-center
+          ${blur ? `blur-sm hover:blur-0` : 'blur-0'}
+          `}
         {...props}
       >
         {children}
@@ -72,7 +77,9 @@ export const Typography: React.FC<TypographyProps> = ({
   const textDisplay = () => {
     return (
       <p
-        className={`text-lg sm:text-xl text-${alignment} text-${color} font-poppins font-${weight} my-2`}
+        className={`text-lg sm:text-xl text-${alignment} text-${color} font-poppins font-${weight} my-2
+        ${blur ? `blur-sm hover:blur-0` : 'blur-0'}
+        `}
       >
         {children}
       </p>

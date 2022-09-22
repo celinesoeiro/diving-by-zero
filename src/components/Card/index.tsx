@@ -9,6 +9,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   categories?: string[] | [];
   loading?: boolean;
   hasToggle?: boolean;
+  factId?: string;
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -16,23 +17,40 @@ export const Card: React.FC<CardProps> = ({
   categories,
   loading,
   hasToggle = false,
+  factId,
   ...props
 }) => {
   const [showMore, setShowMore] = useState(true);
+  const [showsButton, setShowsButton] = useState(false);
   const [text, setText] = useState(content);
+  const [isExplicit, setIsExplicit] = useState(false);
 
   const limit = 75;
 
   useEffect(() => {
     if (hasToggle && content && content.length > limit) {
       setText(`${content?.substring(0, limit)}...`);
+      setShowsButton(true);
 
       return;
     }
 
     setText(content);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
+
+  useEffect(() => {
+    if (categories && categories?.length > 0) {
+      categories?.map((category) => {
+        if (category === 'explicit') {
+          setIsExplicit(true);
+        } else {
+          setIsExplicit(false);
+        }
+      });
+    } else {
+      setIsExplicit(false);
+    }
+  }, [categories, factId]);
 
   const showWholeContent = () => {
     setShowMore((current) => !current);
@@ -62,12 +80,12 @@ export const Card: React.FC<CardProps> = ({
         <Spinner />
       ) : (
         <>
-          <div className="flex flex-col gap-4">
-            <Typography alignment="center" variant="text_display">
+          <div className="flex flex-col gap-4 h-full justify-center">
+            <Typography alignment="center" variant="text_display" blur={isExplicit}>
               {text}
             </Typography>
 
-            {hasToggle && (
+            {hasToggle && showsButton && (
               <button
                 className="font-semibold text-xs text-secondary cursor-pointer self-end p-0 m-0"
                 onClick={showWholeContent}

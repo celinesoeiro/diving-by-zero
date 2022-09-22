@@ -67,7 +67,6 @@ export const Home = ({ categories }: HomeProps) => {
   };
 
   useEffect(() => {
-    console.log('aqui');
     getRandomFact();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -104,7 +103,7 @@ export const Home = ({ categories }: HomeProps) => {
             "
         >
           <Typography variant="heading" weight="bold" color="dark" alignment="center">
-            Chuck Norris Facts
+            Chuck Norris facts
           </Typography>
 
           <div
@@ -119,6 +118,7 @@ export const Home = ({ categories }: HomeProps) => {
                     key={fact.id}
                     content={fact.value}
                     hasToggle
+                    factId={fact.id}
                     id="content-card"
                   />
                 ))}
@@ -129,6 +129,7 @@ export const Home = ({ categories }: HomeProps) => {
                 content={fact?.value}
                 loading={loading}
                 hasToggle={false}
+                factId={fact?.id}
                 id="content-card"
               />
             )}

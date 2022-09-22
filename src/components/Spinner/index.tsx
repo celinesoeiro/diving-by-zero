@@ -1,8 +1,8 @@
 export const Spinner = () => {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex h-full w-full justify-center items-center">
       <svg
-        className="inline mr-3 w-8 h-8 text-neutral animate-spin fill-secondary"
+        className="inline mr-3 w-12 h-12 text-neutral animate-spin fill-secondary"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
