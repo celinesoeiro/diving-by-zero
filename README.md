@@ -1,34 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+  <br>
+  Chuck Norris Facts
+  <br>
+</h1>
 
-## Getting Started
+<h4 align="center">A minimal app built with <a href="https://nextjs.org/" target="_blank">Next.js</a>, <a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> and <a href="https://api.chucknorris.io/" target="_blank">Chuck Norris Facts API</a> to help you learn facts about Chuck Norris.</h4>
 
-First, run the development server:
+<br/>
+
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#how-to-use">How To Use</a> •
+  <a href="#download">Download</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#related">Related</a> •
+  <a href="#license">License</a>
+</p>
+
+<div align="center">
+
+![6udfyw](https://user-images.githubusercontent.com/52112166/191875096-6faf9528-8e93-4d9f-b560-23c8171c3584.gif)
+
+[Watch the video](https://www.loom.com/share/4e8130ad3f204320916ed99c4e95d950)
+
+</div>
+
+## Key Features
+
+* Fetch Chuck Norris facts by keyword, by category or randomly
+* Explicit content should be dealed with care, therefore you can only see those if you hover on it
+
+## How To Use
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```bash
-npm run dev
-# or
-yarn dev
+# Clone this repository
+$ git clone https://github.com/celinesoeiro/diving-by-zero.git
+
+# Go into the repository
+$ cd chuck-norris-facts
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> **Note**
+> If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Credits
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+This application was built with
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [Axios](https://axios-http.com/ptbr/docs/intro)
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Typescript](https://www.typescriptlang.org/)
+- [React icons](https://react-icons.github.io/react-icons)
+- [Chuck Norris Facts API](https://api.chucknorris.io/)
 
-## Learn More
+## Related
 
-To learn more about Next.js, take a look at the following resources:
+[markdownify-web](https://github.com/amitmerchant1990/markdownify-web) - Web version of Markdownify
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+MIT
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> &nbsp;&middot;&nbsp; Portfolio [celinesoeiro.com](https://celinesoeiro.com/) &nbsp;&middot;&nbsp;
+> GitHub [@celinesoeiro](https://github.com/celinesoeiro) &nbsp;&middot;&nbsp;
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
