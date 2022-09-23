@@ -1,5 +1,8 @@
+import { useRouter } from 'next/router';
+
 import { Typography } from 'components/Typography';
 import { Wrapper } from 'components/Wrapper';
+import { Button } from 'components/Button';
 
 interface ErrorProps {
   status: '404' | '500';
@@ -7,6 +10,8 @@ interface ErrorProps {
 }
 
 export const NotFound: React.FC<ErrorProps> = ({ status, message }) => {
+  const router = useRouter();
+
   return (
     <Wrapper>
       <div className="flex flex-col justify-center w-full h-full content-center items-center px-5">
@@ -17,6 +22,8 @@ export const NotFound: React.FC<ErrorProps> = ({ status, message }) => {
         <Typography variant="text_display" alignment="center">
           {message}
         </Typography>
+
+        <Button onClick={() => router.push('/')} label="back to homepage" />
       </div>
     </Wrapper>
   );
