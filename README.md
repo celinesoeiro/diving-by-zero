@@ -62,10 +62,6 @@ This application was built with
 - [React icons](https://react-icons.github.io/react-icons)
 - [Chuck Norris Facts API](https://api.chucknorris.io/)
 
-## Related
-
-[markdownify-web](https://github.com/amitmerchant1990/markdownify-web) - Web version of Markdownify
-
 ## License
 
 MIT
