@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "cy:open": "yarn cypress open",
-    "cy:run": "yarn cypress run"
+    "cy:run": "yarn cypress run",
+    "prepare": "husky install"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -29,6 +30,7 @@
     "eslint-config-next": "12.3.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8",

@@ -11,9 +11,7 @@
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
   <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
   <a href="#license">License</a>
 </p>
 
@@ -61,10 +59,6 @@ This application was built with
 - [Typescript](https://www.typescriptlang.org/)
 - [React icons](https://react-icons.github.io/react-icons)
 - [Chuck Norris Facts API](https://api.chucknorris.io/)
-
-## Related
-
-[markdownify-web](https://github.com/amitmerchant1990/markdownify-web) - Web version of Markdownify
 
 ## License
 
