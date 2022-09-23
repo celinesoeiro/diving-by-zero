@@ -12,17 +12,6 @@ export type APIContract = {
 
 describe('Landing page', () => {
   let randomFact = {} as APIContract;
-  let categories = [] as string[];
-
-  // before(() => {
-  //   cy.intercept('/jokes/random', { fixture: 'fact.json' });
-
-  //   // cy.intercept('/categories').as('categories');
-
-  //   // cy.wait('@categories').then((categories) => {
-  //   //   categories = categories.response?.body;
-  //   // });
-  // });
 
   it('Visits the landing page', () => {
     cy.visit('/');
@@ -44,13 +33,7 @@ describe('Landing page', () => {
 
   it('Compares card content with request response', () => {
     cy.get('[id="content"]').within(() => {
-      cy.get('[id="content-card"]').within(() => {
-        cy.get('p')
-          .invoke('text')
-          .then((elementText) => {
-            expect(elementText).to.contain(randomFact.value);
-          });
-      });
+      cy.displayedTextShouldMatch(randomFact.value);
     });
   });
 
@@ -58,13 +41,7 @@ describe('Landing page', () => {
     cy.get('[id="content"]').within(() => {
       cy.get('[id=fetch-fact-button]').click();
 
-      cy.get('[id="content-card"]').within(() => {
-        cy.get('p')
-          .invoke('text')
-          .then((elementText) => {
-            expect(elementText).to.not.contain(randomFact.value);
-          });
-      });
+      cy.displayedTextShouldNotMatch(randomFact.value);
     });
   });
 
@@ -72,13 +49,7 @@ describe('Landing page', () => {
     cy.get('[id="content"]').within(() => {
       cy.get('[id=category]').select('dev');
 
-      cy.get('[id="content-card"]').within(() => {
-        cy.get('p')
-          .invoke('text')
-          .then((elementText) => {
-            expect(elementText).to.not.contain(randomFact.value);
-          });
-      });
+      cy.displayedTextShouldNotMatch(randomFact.value);
     });
   });
 
@@ -86,13 +57,7 @@ describe('Landing page', () => {
     cy.get('[id="content"]').within(() => {
       cy.get('button').eq(1).should('contain', 'clear').click(); // First clear button
 
-      cy.get('[id="content-card"]').within(() => {
-        cy.get('p')
-          .invoke('text')
-          .then((elementText) => {
-            expect(elementText).to.not.contain(randomFact.value);
-          });
-      });
+      cy.displayedTextShouldNotMatch(randomFact.value);
     });
   });
 
@@ -106,13 +71,7 @@ describe('Landing page', () => {
       cy.wait('@findByKeyword').then(() => {
         cy.get('[id="content-card"]').should('have.length.at.least', 1);
 
-        cy.get('[id="content-card"]').within(() => {
-          cy.get('p')
-            .invoke('text')
-            .then((elementText) => {
-              expect(elementText).to.not.contain(randomFact.value);
-            });
-        });
+        cy.displayedTextShouldNotMatch(randomFact.value);
       });
     });
   });
@@ -121,13 +80,7 @@ describe('Landing page', () => {
     cy.get('[id="content"]').within(() => {
       cy.get('button').last().click(); // Last clear button
 
-      cy.get('[id="content-card"]').within(() => {
-        cy.get('p')
-          .invoke('text')
-          .then((elementText) => {
-            expect(elementText).to.not.contain(randomFact.value);
-          });
-      });
+      cy.displayedTextShouldNotMatch(randomFact.value);
     });
   });
 });
